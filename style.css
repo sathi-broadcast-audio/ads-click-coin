@@ -1,0 +1,124 @@
+/* সাধারণ সেটিংস */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+.container {
+    width: 95%;
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* কার্ড স্টাইল */
+.card {
+    background: #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.balance {
+    font-size: 32px;
+    font-weight: bold;
+    color: gold;
+    text-align: center;
+}
+
+/* বাটন স্টাইল */
+.btn {
+    display: block;
+    width: 100%;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* ফর্ম এলিমেন্ট */
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: #334155;
+    color: white;
+}
+
+/* প্রোফাইল ইমেজ */
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid gold;
+    display: block;
+    margin: auto;
+}
+
+/* নেভিগেশন বার */
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1e293b;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border-top: 1px solid #334155;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-space {
+    height: 70px;
+}
+
+/* ইনফো বক্স (প্রোফাইল পেজের জন্য) */
+.info-box {
+    background: #334155;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.value {
+    font-size: 16px;
+    font-weight: bold;
+}
