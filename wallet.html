@@ -1,68 +1,24 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallet - Ads Click Coin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="wallet-container">
-        <section class="balance-card">
-            <p>AVAILABLE BALANCE</p>
-            <h2 id="balance-display">৳0.00</h2>
-            <button class="withdraw-main-btn" onclick="showWithdrawForm()">Withdraw Now</button>
-        </section>
-
-        <div id="withdraw-form" class="withdraw-form-box" style="display:none;">
-            <h3>Request Withdrawal</h3>
-            <div class="form-group">
-                <select id="method">
-                    <option value="bkash">Bkash</option>
-                    <option value="nagad">Nagad</option>
-                </select>
-                <input type="number" id="account-number" placeholder="Enter your number">
-                <input type="number" id="amount" placeholder="Amount (Min ৳20)">
-                <button class="submit-btn" onclick="processWithdraw()">Submit Request</button>
-            </div>
-        </div>
-
-        <section class="history-section">
-            <h3>Withdrawal History</h3>
-            <div id="history-list" class="history-list">
-                <div class="history-item">
-                    <span>Bkash: 01xxxxxxxxx</span>
-                    <span>৳50</span>
-                    <span class="status">Pending</span>
-                </div>
-            </div>
-        </section>
+    <div class="dashboard">
+        <header><h1>Wallet</h1></header>
+        <div class="balance-card"><p>Balance</p><h2 id="balance-display">৳0</h2></div>
+        <input type="number" id="amount" placeholder="Amount (Min 20)">
+        <input type="text" id="account-number" placeholder="Account Number">
+        <button class="withdraw-main-btn" onclick="processWithdraw()">Withdraw</button>
     </div>
-
     <nav class="navbar">
-        <a href="index.html" class="nav-item">Home</a>
-        <a href="tasks.html" class="nav-item">Tasks</a>
-        <a href="refer.html" class="nav-item">Refer</a>
-        <a href="wallet.html" class="nav-item">Wallet</a>
-        <a href="profile.html" class="nav-item">Profile</a>
+        <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i><span>Tasks</span></a>
+        <a href="refer.html" class="nav-item"><i class="fas fa-user-friends"></i><span>Refer</span></a>
+        <a href="wallet.html" class="nav-item active"><i class="fas fa-wallet"></i><span>Wallet</span></a>
+        <a href="profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
     </nav>
-
-    <script>
-        function showWithdrawForm() {
-            const form = document.getElementById('withdraw-form');
-            form.style.display = (form.style.display === 'none') ? 'block' : 'none';
-        }
-
-        function processWithdraw() {
-            let amount = document.getElementById('amount').value;
-            if (amount < 20) {
-                alert("Minimum withdrawal amount is ৳20!");
-            } else {
-                alert("Withdrawal request submitted!");
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
-  </html>
-  
+</html>
