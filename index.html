@@ -12,7 +12,8 @@
         <button class="btn-green" onclick="location.href='tasks.html'">START NOW</button>
         <div class="card">
             <h3>Balance Info</h3>
-            <p>Available: <b>0.00 BDT</b></p>
+            <!-- ব্যালেন্স এখানে আপডেট হবে -->
+            <p>Available: <b id="balance">0.00</b> BDT</p>
             <p>Pending: <b>0.00 BDT</b></p>
         </div>
     </div>
@@ -24,5 +25,9 @@
         <a href="wallet.html" class="nav-link">💰</a>
         <a href="profile.html" class="nav-link">👤</a>
     </div>
+
+    <!-- টেলিগ্রাম ওয়েব অ্যাপের জন্য -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
