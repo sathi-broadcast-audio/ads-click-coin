@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +7,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>💸 Withdraw</h1>
-        <div class="card">
-            <select id="paymentMethod">
-                <option value="">Select Payment Method</option>
-                <option value="bkash">bKash</option>
+
+    <div class="withdraw-container">
+        <h2>Withdraw Funds</h2>
+        
+        <div class="form-group">
+            <label>Select Method</label>
+            <select id="method">
+                <option value="bkash">Bkash</option>
                 <option value="nagad">Nagad</option>
             </select>
-            <input type="text" id="accountNumber" placeholder="Enter Number">
-            <input type="number" id="withdrawAmount" placeholder="Enter Amount">
-            <button class="btn" id="withdrawBtn">Submit</button>
         </div>
-        <div class="navbar">
-            <a href="index.html">🏠 Home</a>
-            <a href="withdraw.html">💸 Withdraw</a>
-            <a href="profile.html">👤 Profile</a>
+
+        <div class="form-group">
+            <label>Account Number</label>
+            <input type="number" id="account-number" placeholder="Enter your number">
         </div>
+
+        <div class="form-group">
+            <label>Amount (Min ৳20)</label>
+            <input type="number" id="amount" placeholder="৳20">
+        </div>
+
+        <button class="submit-btn" onclick="processWithdraw()">Confirm Withdraw</button>
     </div>
-    <script src="script.js"></script>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="tasks.html" class="nav-item">Tasks</a>
+        <a href="refer.html" class="nav-item">Refer</a>
+        <a href="wallet.html" class="nav-item">Wallet</a>
+        <a href="profile.html" class="nav-item">Profile</a>
+    </nav>
+
+    <script>
+        function processWithdraw() {
+            let amount = document.getElementById('amount').value;
+            if (amount < 20) {
+                alert("Minimum withdrawal amount is ৳20!");
+            } else {
+                alert("Withdrawal request submitted successfully!");
+                // এখানে সুপাবেস ডাটাবেসে ডাটা পাঠানোর লজিক বসবে
+            }
+        }
+    </script>
 </body>
 </html>
