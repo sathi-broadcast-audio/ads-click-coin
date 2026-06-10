@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Home - AdsClickCoin</title>
+    <style>
+        /* লোডিং পাইপ স্টাইল */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff; z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+        }
+        .pipe-container { width: 80%; height: 20px; border: 3px solid #333; border-radius: 10px; overflow: hidden; }
+        .pipe-fill { width: 0%; height: 100%; background: #28a745; animation: fill 2s forwards; }
+        @keyframes fill { from { width: 0%; } to { width: 100%; } }
+    </style>
 </head>
 <body>
 
-    <div id="loading-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:9999; display:flex; justify-content:center; align-items:center;">
-        <p>Loading your data...</p>
+    <div id="preloader">
+        <p>Loading System...</p>
+        <div class="pipe-container"><div class="pipe-fill"></div></div>
     </div>
 
     <div class="container">
@@ -38,25 +50,21 @@
         const tg = window.Telegram.WebApp;
         tg.ready();
 
-        // ইউজার নাম দেখানো
-        const user = tg.initDataUnsafe.user;
-        if (user) {
-            document.getElementById('username').innerText = user.first_name;
-        }
-
-        // ব্যালেন্স লোড করা
-        async function init() {
+        // ইউজার নাম ও ব্যালেন্স লোড
+        window.addEventListener('load', async () => {
+            const user = tg.initDataUnsafe.user;
             if (user) {
+                document.getElementById('username').innerText = user.first_name;
                 const userData = await getData(`user_${user.id}`);
                 if (userData) {
                     document.getElementById('balance').innerText = userData.balance.toFixed(2);
                 }
             }
-            // লোডিং স্ক্রিন বন্ধ করা
-            document.getElementById('loading-screen').style.display = 'none';
-        }
-        
-        init();
+            // ২ সেকেন্ড পর লোডিং সরানো
+            setTimeout(() => {
+                document.getElementById('preloader').style.display = 'none';
+            }, 2000);
+        });
     </script>
 </body>
 </html>
