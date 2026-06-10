@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>👤 Profile</h1>
-        <div class="card">
-            <img id="profilePhoto" class="profile-img" src="https://via.placeholder.com/100" alt="Photo">
-            <h2 id="userName" style="text-align:center; margin-top:10px;">User</h2>
+
+    <div class="profile-container">
+        <header class="profile-header">
+            <div class="avatar" id="user-avatar">👤</div>
+            <h2 id="user-name">Loading...</h2>
+            <p>Telegram ID: <span id="user-id">000000</span></p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p>Total Income</p>
+                <h3 id="total-income">$0.000</h3>
+            </div>
+            <div class="stat-card">
+                <p>Available Balance</p>
+                <h3 id="current-balance">$0.000</h3>
+            </div>
+            <div class="stat-card">
+                <p>Total Withdrawals</p>
+                <h3 id="total-withdrawals">$0.000</h3>
+            </div>
+            <div class="stat-card">
+                <p>Total Referrals</p>
+                <h3 id="total-refs">0</h3>
+            </div>
         </div>
-        <div class="card">
-            <p>ID: <span id="userId">000000</span></p>
-            <p>Username: <span id="username">@user</span></p>
-        </div>
-        <div class="navbar">
-            <a href="index.html">🏠 Home</a>
-            <a href="profile.html">👤 Profile</a>
+        
+        <div class="account-actions">
+            <button class="action-btn" onclick="location.href='refer.html'">Invite Friends</button>
+            <button class="action-btn" onclick="location.href='wallet.html'">Update Wallet</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="tasks.html" class="nav-item">Tasks</a>
+        <a href="refer.html" class="nav-item">Refer</a>
+        <a href="wallet.html" class="nav-item">Wallet</a>
+        <a href="profile.html" class="nav-item">Profile</a>
+    </nav>
 </body>
 </html>
