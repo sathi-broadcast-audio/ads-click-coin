@@ -1,20 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Daily Tasks - AdsClickCoin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="dashboard">
-        <header><h1>Tasks</h1></header>
-        <div class="balance-card"><p>New tasks coming soon!</p></div>
+
+    <div class="container">
+        <h1>Daily Tasks</h1>
+        
+        <div class="card" style="background: #fff3cd; color: #856404; border: 1px solid #ffeeba;">
+            <p><b>সতর্কতা:</b> ভুল কাজ করলে পেমেন্ট পাবেন না। এডে ক্লিক করে অবশ্যই ৩০ সেকেন্ড অপেক্ষা করুন!</p>
+        </div>
+
+        <div id="task-list"></div>
     </div>
-    <nav class="navbar">
-        <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="tasks.html" class="nav-item active"><i class="fas fa-tasks"></i><span>Tasks</span></a>
-        <a href="refer.html" class="nav-item"><i class="fas fa-user-friends"></i><span>Refer</span></a>
-        <a href="wallet.html" class="nav-item"><i class="fas fa-wallet"></i><span>Wallet</span></a>
-        <a href="profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
-    </nav>
+
+    <div id="popunder-container">
+        [এখানে আপনার পপ-আন্ডার এর এইচটিএমএল কোডটি বসান]
+    </div>
+    <div class="nav-bar">
+        <a href="index.html" class="nav-link">🏠</a>
+        <a href="tasks.html" class="nav-link" style="border-bottom: 3px solid #28a745;">📋</a>
+        <a href="refer.html" class="nav-link">👥</a>
+        <a href="wallet.html" class="nav-link">💰</a>
+        <a href="profile.html" class="nav-link">👤</a>
+    </div>
+
+    <script type="module">
+        import { adTasks } from './ads.js';
+        const list = document.getElementById('task-list');
+
+        adTasks.forEach(task => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <p style="font-weight: bold;">${task.title} - (০.৫০ টাকা)</p>
+                <button class="btn-green" onclick="handleTask('${task.adLink}')">Start Task</button>
+            `;
+            list.appendChild(card);
+        });
+
+        window.handleTask = (link) => {
+            // পপ-আন্ডার ট্রিগার করার মেসেজ
+            alert("প্রথমে বিজ্ঞাপনটি লোড হচ্ছে, ব্যাক করে আবার ক্লিক করুন!");
+            
+            // মেইন অ্যাড ওপেন করা
+            window.open(link, '_blank');
+        };
+    </script>
 </body>
 </html>
