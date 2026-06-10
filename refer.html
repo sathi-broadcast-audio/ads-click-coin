@@ -1,59 +1,24 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refer & Earn - Ads Click Coin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="refer-container">
-        <header>
-            <h1>Invite Friends</h1>
-            <p>Earn ৳5 for every successful referral!</p>
-        </header>
-
-        <!-- রেফারেল লিঙ্ক সেকশন -->
-        <section class="refer-link-box">
-            <p>Your Referral Link:</p>
-            <div class="link-display">
-                <span id="ref-link">https://t.me/your_bot_username?start=USER_ID</span>
-            </div>
-            <div class="refer-actions">
-                <button class="copy-btn" onclick="copyLink()">Copy Link</button>
-                <button class="share-btn" onclick="shareOnTelegram()">Share on Telegram</button>
-            </div>
-        </section>
-
-        <!-- রেফারেল স্ট্যাটাস -->
-        <section class="refer-stats">
-            <div class="stat-card">
-                <p>Total Referrals</p>
-                <h3 id="total-refs">0</h3>
-            </div>
-            <div class="stat-card">
-                <p>Pending Rewards</p>
-                <h3 id="pending-rewards">৳0</h3>
-            </div>
-        </section>
-
-        <!-- নির্দেশনাবলী -->
-        <div class="refer-info">
-            <small>* Note: Referral bonus of ৳5 will be credited only when your friend reaches a balance of ৳5.</small>
+    <div class="dashboard">
+        <header><h1>Refer Friends</h1><p>Invite and earn rewards!</p></header>
+        <div class="balance-card">
+            <h3>Your Refer Link</h3>
+            <input type="text" value="https://t.me/yourbot" readonly>
+            <button class="start-btn" style="margin-top:10px;">Copy Link</button>
         </div>
     </div>
-
-    <!-- নেভিগেশন বার -->
     <nav class="navbar">
-        <a href="index.html" class="nav-item">Home</a>
-        <a href="tasks.html" class="nav-item">Tasks</a>
-        <a href="refer.html" class="nav-item">Refer</a>
-        <a href="wallet.html" class="nav-item">Wallet</a>
-        <a href="profile.html" class="nav-item">Profile</a>
+        <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i><span>Tasks</span></a>
+        <a href="refer.html" class="nav-item active"><i class="fas fa-user-friends"></i><span>Refer</span></a>
+        <a href="wallet.html" class="nav-item"><i class="fas fa-wallet"></i><span>Wallet</span></a>
+        <a href="profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
     </nav>
-
-    <!-- জাভাস্ক্রিপ্ট ফাইল লিঙ্ক -->
-    <script src="script.js"></script>
 </body>
 </html>
