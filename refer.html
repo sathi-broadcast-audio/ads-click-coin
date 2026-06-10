@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral - AdsClickCoin</title>
+    <title>Refer & Earn - AdsClickCoin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Referral System</h1>
+        <h1>Invite Friends</h1>
         
         <div class="card">
             <h3>Your Referral Link</h3>
-            <input type="text" id="referralLinkInput" readonly>
-            <button class="btn-green" onclick="copyRefLink()">Copy Link</button>
+            <input type="text" id="referralLinkInput" readonly style="margin-bottom: 10px;">
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-green" onclick="copyRefLink()" style="flex: 1;">Copy Link</button>
+                <button class="btn-green" onclick="shareRefLink()" style="flex: 1; background-color: #007bff;">Share</button>
+            </div>
         </div>
 
         <h3>Your Referral History</h3>
@@ -35,11 +39,27 @@
     <script type="module" src="script.js"></script>
     
     <script>
+        // লিংক কপি করার ফাংশন
         function copyRefLink() {
             const copyText = document.getElementById("referralLinkInput");
             copyText.select();
             document.execCommand("copy");
             alert("Link Copied!");
+        }
+
+        // শেয়ার করার ফাংশন (টেলিগ্রাম বা অন্যান্য সোশ্যাল মিডিয়ায়)
+        function shareRefLink() {
+            const refLink = document.getElementById("referralLinkInput").value;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join me on AdsClickCoin!',
+                    text: 'আমার লিংকে ক্লিক করে আমাদের সাথে যুক্ত হোন এবং ইনকাম করুন:',
+                    url: refLink,
+                })
+                .catch((error) => console.log('Error sharing:', error));
+            } else {
+                alert("আপনার ব্রাউজার সরাসরি শেয়ার সাপোর্ট করছে না, কপি করে শেয়ার করুন!");
+            }
         }
     </script>
 </body>
