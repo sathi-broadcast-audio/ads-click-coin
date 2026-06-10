@@ -9,8 +9,7 @@
     <div class="container">
         <h1>My Wallet</h1>
         <div class="card">
-            <p>Total Balance: <b>0.00 BDT</b></p>
-            <p>Total Withdrawn: <b>0.00 BDT</b></p>
+            <p>Total Balance: <b id="balance">0.00</b> BDT</p>
         </div>
         <button class="btn-green" onclick="location.href='withdraw.html'">Withdraw Now</button>
     </div>
@@ -19,8 +18,18 @@
         <a href="index.html" class="nav-link">🏠</a>
         <a href="tasks.html" class="nav-link">📋</a>
         <a href="refer.html" class="nav-link">👥</a>
-        <a href="wallet.html" class="nav-link">💰</a>
+        <a href="wallet.html" class="nav-link" style="border-bottom: 3px solid #28a745;">💰</a>
         <a href="profile.html" class="nav-link">👤</a>
     </div>
+
+    <script type="module">
+        import { getData } from './api.js';
+        const tg = window.Telegram.WebApp;
+        async function loadBalance() {
+            const userData = await getData(`user_${tg.initDataUnsafe.user?.id}`) || { balance: 0 };
+            document.getElementById('balance').innerText = userData.balance.toFixed(2);
+        }
+        loadBalance();
+    </script>
 </body>
 </html>
