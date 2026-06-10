@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="bn">
-<body style="font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding-bottom: 90px;">
-    <div style="padding: 20px;">
-        <h1 style="color: #333;">Refer Friends</h1>
-        <div style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <p>Share your link:</p>
-            <input type="text" value="https://t.me/YourBot?start=ID" readonly style="width: 90%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px;">
-            <button style="width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px; margin-bottom: 10px; font-weight: bold;">Copy Link</button>
-            <button style="width: 100%; padding: 12px; background: #17a2b8; color: white; border: none; border-radius: 8px; font-weight: bold;">Share in Telegram</button>
-        </div>
-        <div style="background: white; padding: 20px; border-radius: 20px; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h3>My Referrals (0)</h3>
-            <p style="color: #888;">No referrals yet.</p>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Refer - AdsClickCoin</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Referral System</h1>
+        <div class="card">
+            <p>Your Referral ID: <b id="refer-id">Loading...</b></p>
+            <p style="font-size: 14px; color: gray;">আপনার আইডিটি বন্ধুদের শেয়ার করুন!</p>
+            <button class="btn-blue" onclick="copyReferLink()">Copy Referral Link</button>
         </div>
     </div>
-    <div style="position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 15px 0; border-top: 2px solid #eee;">
-        <a href="index.html" style="font-size: 28px; text-decoration: none;">🏠</a>
-        <a href="tasks.html" style="font-size: 28px; text-decoration: none;">📋</a>
-        <a href="refer.html" style="font-size: 28px; text-decoration: none; border-bottom: 3px solid #28a745;">👥</a>
-        <a href="wallet.html" style="font-size: 28px; text-decoration: none;">💰</a>
-        <a href="profile.html" style="font-size: 28px; text-decoration: none;">👤</a>
+
+    <div class="nav-bar">
+        <a href="index.html" class="nav-link">🏠</a>
+        <a href="tasks.html" class="nav-link">📋</a>
+        <a href="refer.html" class="nav-link" style="border-bottom: 3px solid #28a745;">👥</a>
+        <a href="wallet.html" class="nav-link">💰</a>
+        <a href="profile.html" class="nav-link">👤</a>
     </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        
+        // ইউজার আইডি সেট করা
+        const userId = tg.initDataUnsafe.user?.id || "N/A";
+        document.getElementById('refer-id').innerText = userId;
+
+        function copyReferLink() {
+            const link = `https://t.me/YOUR_BOT_USERNAME?start=${userId}`;
+            navigator.clipboard.writeText(link);
+            alert("Referral Link copied!");
+        }
+    </script>
 </body>
 </html>
