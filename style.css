@@ -1,84 +1,10 @@
-/* গ্লোবাল ডিজাইন */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #0a0514; /* গাঢ় বেগুনি ব্যাকগ্রাউন্ড */
-    color: #ffffff;
-    padding-bottom: 90px; /* নেভিগেশন বারের জন্য জায়গা বাড়ানো হয়েছে */
-}
-
-/* গোল্ডেন-পার্পল গ্র্যাডিয়েন্ট থিম */
-.gradient-bg {
-    background: linear-gradient(135deg, #8e2de2, #4a00e0);
-}
-
-/* বাটন ডিজাইন (নীল থেকে গোল্ডেন-পার্পল) */
-.start-btn, .withdraw-main-btn, .submit-btn, .copy-btn, .share-btn {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    background: linear-gradient(90deg, #ffb347, #ffcc33); /* গোল্ডেন শেড */
-    color: #000;
-    margin-bottom: 12px;
-    transition: 0.3s;
-}
-
-/* ব্যালেন্স কার্ড */
-.balance-card, .stat-card {
-    background-color: #1a1226;
-    padding: 25px;
-    border-radius: 20px;
-    margin: 20px 0;
-    text-align: center;
-    border: 1px solid #3d2c5e;
-}
-
-.balance-card h2 { font-size: 36px; color: #ffcc33; margin: 10px 0; }
-
-/* উন্নত নেভিগেশন বার (বড় এবং আইকনসহ) */
-.navbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #1a1226;
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 0;
-    border-top: 2px solid #3d2c5e;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
-}
-
-.nav-item {
-    color: #a0a0a0;
-    text-decoration: none;
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.3s;
-}
-
-.nav-item i {
-    font-size: 22px; /* আইকন বড় করা হয়েছে */
-    margin-bottom: 6px;
-}
-
-.nav-item:hover, .nav-item.active {
-    color: #ffcc33; /* গোল্ডেন হাইলাইট */
-}
-
-/* ফর্ম ও ইনপুট */
-input, select {
-    width: 100%;
-    padding: 15px;
-    margin-top: 8px;
-    background: #251a38;
-    border: 1px solid #3d2c5e;
-    border-radius: 12px;
-    color: white;
-    box-sizing: border-box;
-}
+body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #0a0514; color: #ffffff; padding-bottom: 90px; }
+.dashboard { padding: 20px; }
+.balance-card { background-color: #1a1226; padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #3d2c5e; margin-bottom: 20px; }
+.balance-card h2 { font-size: 36px; color: #ffcc33; }
+.start-btn, .withdraw-main-btn { width: 100%; padding: 16px; border-radius: 15px; background: linear-gradient(90deg, #ffb347, #ffcc33); color: #000; font-weight: bold; border: none; cursor: pointer; }
+.navbar { position: fixed; bottom: 0; width: 100%; background-color: #1a1226; display: flex; justify-content: space-around; padding: 15px 0; border-top: 2px solid #3d2c5e; }
+.nav-item { color: #a0a0a0; text-decoration: none; font-size: 13px; display: flex; flex-direction: column; align-items: center; }
+.nav-item.active { color: #ffcc33; }
+.nav-item i { font-size: 22px; margin-bottom: 6px; }
+input { width: 100%; padding: 15px; background: #251a38; border: 1px solid #3d2c5e; border-radius: 12px; color: white; box-sizing: border-box; margin-top: 8px; }
