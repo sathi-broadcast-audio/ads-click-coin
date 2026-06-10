@@ -5,36 +5,54 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 const userId = tg.initDataUnsafe.user?.id || "guest_user";
 
-// পেজ লোড হলে ব্যালেন্স আপডেট করা (ইন্ডেক্স বা ওয়ালেট পেজের জন্য)
-async function updateBalanceDisplay() {
-    const userData = await getData(`user_${userId}`) || { balance: 0, tasks: [] };
+// ১. মূল ব্যালেন্স আপডেট ও রেফারেল কাউন্ট আপডেট করার ফাংশন
+async function updateUI() {
+    const userData = await getData(`user_${userId}`) || { balance: 0, tasks: [], referrals: [] };
+    
+    // ব্যালেন্স আপডেট
     const balanceElement = document.getElementById('balance');
     if (balanceElement) balanceElement.innerText = userData.balance.toFixed(2);
+    
+    // রেফারেল লিংক সেট করা (রেফারেল পেজের জন্য)
+    const refInput = document.getElementById('referralLinkInput');
+    if (refInput) refInput.value = `https://t.me/AdsClickCoinBot?start=${userId}`;
+    
+    // রেফারেল হিস্ট্রি দেখানো (রেফারেল পেজের জন্য)
+    const refList = document.getElementById('refer-list');
+    if (refList) {
+        if (userData.referrals.length === 0) {
+            refList.innerHTML = "<p>এখনো কোনো রেফার নেই।</p>";
+        } else {
+            refList.innerHTML = userData.referrals.map(ref => `
+                <div class="card">
+                    <p>User ID: ${ref.id}</p>
+                    <p>Status: ${ref.balance >= 5 ? '✅ Counted' : '⏳ Pending'}</p>
+                </div>
+            `).join('');
+        }
+    }
 }
 
-// টাস্ক ক্লিক হ্যান্ডেলার
+// ২. টাস্ক ক্লিক হ্যান্ডেলার (আপনার ৮ নম্বর ফাইলের কোড অক্ষুণ্ণ রাখা হয়েছে)
 window.handleTask = async (adLink, taskId) => {
-    // পপ-আন্ডার দেখানোর মেসেজ
     alert("বিজ্ঞাপন লোড হচ্ছে, ব্যাক করে আবার ক্লিক করুন!");
     window.open(adLink, '_blank');
 
-    // ৩০ সেকেন্ড পর পেমেন্ট যোগ করার লজিক
     setTimeout(async () => {
-        let userData = await getData(`user_${userId}`) || { balance: 0, tasks: [] };
+        let userData = await getData(`user_${userId}`) || { balance: 0, tasks: [], referrals: [] };
         
-        // একই টাস্ক যেন বারবার না করা যায়
         if (!userData.tasks.includes(taskId)) {
-            userData.balance += 0.50; // প্রতি টাস্কের দাম ৫০ পয়সা
+            userData.balance += 0.50;
             userData.tasks.push(taskId);
             
             await setData(`user_${userId}`, userData);
             alert("অভিনন্দন! আপনি ০.৫০ টাকা পেয়েছেন।");
-            updateBalanceDisplay();
+            updateUI();
         } else {
             alert("আপনি এই টাস্কটি আগেই করেছেন!");
         }
-    }, 30000); // ৩০ সেকেন্ড অপেক্ষা
+    }, 30000);
 };
 
-// অ্যাপ ওপেন হওয়ার সাথে সাথে ব্যালেন্স লোড করা
-updateBalanceDisplay();
+// অ্যাপ ওপেন হওয়ার সাথে সাথে ব্যালেন্স ও রেফারেল ডাটা লোড করা
+updateUI();
