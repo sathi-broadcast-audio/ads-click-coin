@@ -8,32 +8,30 @@
 <body>
     <div class="container">
         <h1>Withdraw Request</h1>
-        
         <div class="card">
-            <label>Select Payment Method:</label><br><br>
-            <button class="btn-blue">Bkash</button>
-            <button class="btn-yellow">Nagad</button>
-            <input type="text" placeholder="Enter Wallet Number" style="width: 90%; padding: 10px; margin: 10px 0;">
-            <button class="btn-green">Submit Withdrawal</button>
+            <input type="text" id="walletNum" placeholder="Enter Bkash/Nagad Number" style="width: 90%; padding: 10px; margin-bottom: 10px;">
+            <button class="btn-green" onclick="submitWithdraw()">Submit Withdrawal</button>
         </div>
 
         <div class="card">
             <h3>Withdrawal History</h3>
-            <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
-                <p>Bkash: 50 BDT - <b style="color: orange;">Pending</b></p>
-            </div>
-            <div style="padding: 10px 0;">
-                <p>Nagad: 100 BDT - <b style="color: green;">Approved</b></p>
-            </div>
+            <div id="withdraw-list"></div>
         </div>
     </div>
 
     <div class="nav-bar">
-        <a href="index.html" class="nav-link">🏠</a>
-        <a href="tasks.html" class="nav-link">📋</a>
-        <a href="refer.html" class="nav-link">👥</a>
-        <a href="wallet.html" class="nav-link">💰</a>
-        <a href="profile.html" class="nav-link">👤</a>
-    </div>
+        </div>
+
+    <script type="module">
+        import { getData, setData } from './api.js';
+        const tg = window.Telegram.WebApp;
+        
+        async function loadHistory() {
+            const userData = await getData(`user_${tg.initDataUnsafe.user?.id}`) || { history: [] };
+            const list = document.getElementById('withdraw-list');
+            list.innerHTML = userData.history.map(h => `<p>${h.amount} BDT - <b>${h.status}</b></p>`).join('');
+        }
+        loadHistory();
+    </script>
 </body>
 </html>
