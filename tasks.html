@@ -9,7 +9,6 @@
 
     <div class="container">
         <h1>Daily Tasks</h1>
-        
         <div class="card" style="background: #fff3cd; color: #856404; border: 1px solid #ffeeba;">
             <p><b>সতর্কতা:</b> ভুল কাজ করলে পেমেন্ট পাবেন না। এডে ক্লিক করে অবশ্যই ৩০ সেকেন্ড অপেক্ষা করুন!</p>
         </div>
@@ -17,9 +16,11 @@
         <div id="task-list"></div>
     </div>
 
+    <!-- পপ-আন্ডার অ্যাড কোড এখানে বসান -->
     <div id="popunder-container">
-        [এখানে আপনার পপ-আন্ডার এর এইচটিএমএল কোডটি বসান]
+        [আপনার পপ-আন্ডার এইচটিএমএল কোড এখানে]
     </div>
+
     <div class="nav-bar">
         <a href="index.html" class="nav-link">🏠</a>
         <a href="tasks.html" class="nav-link" style="border-bottom: 3px solid #28a745;">📋</a>
@@ -30,6 +31,8 @@
 
     <script type="module">
         import { adTasks } from './ads.js';
+        import './script.js'; // স্ক্রিপ্ট ফাইল ইমপোর্ট করা
+
         const list = document.getElementById('task-list');
 
         adTasks.forEach(task => {
@@ -37,18 +40,10 @@
             card.className = 'card';
             card.innerHTML = `
                 <p style="font-weight: bold;">${task.title} - (০.৫০ টাকা)</p>
-                <button class="btn-green" onclick="handleTask('${task.adLink}')">Start Task</button>
+                <button class="btn-green" onclick="handleTask('${task.adLink}', ${task.id})">Start Task</button>
             `;
             list.appendChild(card);
         });
-
-        window.handleTask = (link) => {
-            // পপ-আন্ডার ট্রিগার করার মেসেজ
-            alert("প্রথমে বিজ্ঞাপনটি লোড হচ্ছে, ব্যাক করে আবার ক্লিক করুন!");
-            
-            // মেইন অ্যাড ওপেন করা
-            window.open(link, '_blank');
-        };
     </script>
 </body>
 </html>
