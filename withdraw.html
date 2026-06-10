@@ -2,36 +2,52 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Withdraw - AdsClickCoin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* বাটন ও ইনপুট বড় করার সিএসএস */
+        .withdraw-box { padding: 20px; }
+        .large-input { width: 100%; padding: 15px; font-size: 18px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; }
+        .large-btn { width: 100%; padding: 20px; font-size: 20px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Withdraw Request</h1>
-        <div class="card">
-            <input type="text" id="walletNum" placeholder="Enter Bkash/Nagad Number" style="width: 90%; padding: 10px; margin-bottom: 10px;">
-            <button class="btn-green" onclick="submitWithdraw()">Submit Withdrawal</button>
+        <h1>Withdraw Money</h1>
+        
+        <div class="card withdraw-box">
+            <!-- পেমেন্ট মেথড সিলেকশন -->
+            <label for="paymentMethod">Select Method:</label>
+            <select id="paymentMethod" class="large-input">
+                <option value="Bkash">বিকাশ (Bkash)</option>
+                <option value="Nagad">নগদ (Nagad)</option>
+            </select>
+
+            <!-- নম্বর ও অ্যামাউন্ট -->
+            <input type="text" id="walletNum" class="large-input" placeholder="আপনার নম্বর লিখুন">
+            <input type="number" id="withdrawAmount" class="large-input" value="50" readonly>
+            
+            <button class="large-btn" onclick="submitWithdraw()">Withdraw Now</button>
         </div>
 
-        <div class="card">
-            <h3>Withdrawal History</h3>
-            <div id="withdraw-list"></div>
+        <h3>Withdraw History</h3>
+        <div id="withdraw-history">
+            <p>Loading history...</p>
         </div>
     </div>
 
+    <!-- নেভিগেশন বার -->
     <div class="nav-bar">
-        </div>
+        <a href="index.html" class="nav-link">🏠</a>
+        <a href="tasks.html" class="nav-link">📋</a>
+        <a href="refer.html" class="nav-link">👥</a>
+        <a href="wallet.html" class="nav-link" style="border-bottom: 3px solid #28a745;">💰</a>
+        <a href="profile.html" class="nav-link">👤</a>
+    </div>
 
-    <script type="module">
-        import { getData, setData } from './api.js';
-        const tg = window.Telegram.WebApp;
-        
-        async function loadHistory() {
-            const userData = await getData(`user_${tg.initDataUnsafe.user?.id}`) || { history: [] };
-            const list = document.getElementById('withdraw-list');
-            list.innerHTML = userData.history.map(h => `<p>${h.amount} BDT - <b>${h.status}</b></p>`).join('');
-        }
-        loadHistory();
-    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
