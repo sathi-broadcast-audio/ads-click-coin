@@ -1,10 +1,83 @@
-body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #0a0514; color: #ffffff; padding-bottom: 90px; }
-.dashboard { padding: 20px; }
-.balance-card { background-color: #1a1226; padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #3d2c5e; margin-bottom: 20px; }
-.balance-card h2 { font-size: 36px; color: #ffcc33; }
-.start-btn, .withdraw-main-btn { width: 100%; padding: 16px; border-radius: 15px; background: linear-gradient(90deg, #ffb347, #ffcc33); color: #000; font-weight: bold; border: none; cursor: pointer; }
-.navbar { position: fixed; bottom: 0; width: 100%; background-color: #1a1226; display: flex; justify-content: space-around; padding: 15px 0; border-top: 2px solid #3d2c5e; box-shadow: 0 -5px 15px rgba(0,0,0,0.3); }
-.nav-item { color: #a0a0a0; text-decoration: none; font-size: 13px; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
-.nav-item.active { color: #ffcc33; }
-.nav-item i { font-size: 22px; margin-bottom: 6px; }
-input { width: 100%; padding: 15px; background: #251a38; border: 1px solid #3d2c5e; border-radius: 12px; color: white; box-sizing: border-box; margin-top: 8px; }
+/* বেসিক সেটআপ */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f0f2f5; 
+    margin: 0; 
+    padding-bottom: 90px; 
+}
+
+.container { 
+    padding: 20px; 
+}
+
+/* কার্ড স্টাইল */
+.card { 
+    background: white; 
+    padding: 20px; 
+    border-radius: 20px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    margin-bottom: 20px; 
+}
+
+/* বাটন স্টাইল */
+.btn-green { 
+    width: 100%; 
+    padding: 15px; 
+    background: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 12px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+
+.btn-green:active { transform: scale(0.95); }
+
+.btn-blue { 
+    background: #007bff; 
+    color: white; 
+    padding: 12px; 
+    border: none; 
+    border-radius: 10px; 
+    width: 100%; 
+    margin-bottom: 10px; 
+    font-weight: bold; 
+}
+
+.btn-yellow { 
+    background: #ffc107; 
+    color: black; 
+    padding: 12px; 
+    border: none; 
+    border-radius: 10px; 
+    width: 100%; 
+    margin-bottom: 10px; 
+    font-weight: bold; 
+}
+
+/* নেভিগেশন বার ডিজাইন */
+.nav-bar { 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    display: flex; 
+    justify-content: space-around; 
+    background: #fff; 
+    padding: 15px 0; 
+    border-top: 2px solid #eee; 
+    z-index: 1000; 
+}
+
+.nav-link { 
+    font-size: 28px; 
+    text-decoration: none; 
+    transition: 0.3s; 
+}
+
+.nav-link:hover { transform: scale(1.2); }
+
+/* টাইটেল এবং টেক্সট */
+h1 { color: #333; font-size: 24px; }
+h3 { margin-top: 0; }
