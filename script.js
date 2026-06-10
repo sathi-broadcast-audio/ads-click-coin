@@ -11,16 +11,18 @@ async function updateUI() {
         balance: 0, 
         tasks: [], 
         referrals: [], 
-        history: [] // উইথড্র হিস্ট্রি রাখার জায়গা
+        history: [] 
     };
     
     // ব্যালেন্স আপডেট
     const balanceElement = document.getElementById('balance');
     if (balanceElement) balanceElement.innerText = userData.balance.toFixed(2);
     
-    // রেফারেল লিংক সেট করা
+    // রেফারেল লিংক সেট করা (বট ইউজার নেম অনুযায়ী)
     const refInput = document.getElementById('referralLinkInput');
-    if (refInput) refInput.value = `https://t.me/AdsClickCoinBot?start=${userId}`;
+    if (refInput) {
+        refInput.value = `https://t.me/AdsClickCoinBot?start=${userId}`;
+    }
     
     // রেফারেল লিস্ট দেখানো (রেফারেল পেজের জন্য)
     const refList = document.getElementById('refer-list');
@@ -37,11 +39,11 @@ async function updateUI() {
         }
     }
 
-    // উইথড্র হিস্ট্রি দেখানো (উইথড্র/ওয়ালেট পেজের জন্য)
+    // উইথড্র হিস্ট্রি দেখানো (ওয়ালেট পেজের জন্য)
     const historyList = document.getElementById('withdraw-history');
     if (historyList) {
         if (userData.history.length === 0) {
-            historyList.innerHTML = "<p>কোনো হিস্ট্রি নেই।</p>";
+            historyList.innerHTML = "<p>কোনো উইথড্র হিস্ট্রি নেই।</p>";
         } else {
             historyList.innerHTML = userData.history.map(h => `
                 <div class="card">
@@ -54,17 +56,18 @@ async function updateUI() {
     }
 }
 
-// ২. টাস্ক ক্লিক হ্যান্ডেলার
+// ২. টাস্ক ক্লিক হ্যান্ডেলার (আপনার ৮ নম্বর ফাইলের লজিক)
 window.handleTask = async (adLink, taskId) => {
     alert("বিজ্ঞাপন লোড হচ্ছে, ব্যাক করে আবার ক্লিক করুন!");
     window.open(adLink, '_blank');
 
     setTimeout(async () => {
-        let userData = await getData(`user_${userId}`) || { balance: 0, tasks: [] };
+        let userData = await getData(`user_${userId}`) || { balance: 0, tasks: [], history: [], referrals: [] };
         
         if (!userData.tasks.includes(taskId)) {
             userData.balance += 0.50;
             userData.tasks.push(taskId);
+            
             await setData(`user_${userId}`, userData);
             alert("অভিনন্দন! আপনি ০.৫০ টাকা পেয়েছেন।");
             updateUI();
@@ -74,10 +77,10 @@ window.handleTask = async (adLink, taskId) => {
     }, 30000);
 };
 
-// ৩. উইথড্র হ্যান্ডলার (হিস্ট্রি যুক্ত করার লজিক)
+// ৩. উইথড্র সাবমিট হ্যান্ডেলার
 window.submitWithdraw = async () => {
     const walletNum = document.getElementById('walletNum').value;
-    if (!walletNum) return alert("নম্বর দিন!");
+    if (!walletNum) return alert("দয়া করে আপনার নম্বর দিন!");
 
     let userData = await getData(`user_${userId}`) || { balance: 0, history: [] };
     
@@ -85,11 +88,12 @@ window.submitWithdraw = async () => {
         userData.balance -= 50;
         userData.history.push({ amount: 50, status: "Pending", number: walletNum });
         await setData(`user_${userId}`, userData);
-        alert("উইথড্র রিকোয়েস্ট সফল!");
+        alert("উইথড্র রিকোয়েস্ট সফলভাবে জমা হয়েছে!");
         updateUI();
     } else {
         alert("ন্যূনতম ৫০ টাকা ব্যালেন্স প্রয়োজন!");
     }
 };
 
+// অ্যাপ ওপেন হওয়ার সাথে সাথে সব আপডেট করা
 updateUI();
