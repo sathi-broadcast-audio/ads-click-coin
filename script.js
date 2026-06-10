@@ -1,22 +1,40 @@
-const supabaseUrl = 'https://lqtubwgarrabiwhusytj.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxdHVid2dhcnJhYml3aHVzeXRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwNzI5MTksImV4cCI6MjA5NjY0ODkxOX0.0TNRfDZCn-y1VY-nw3KcUctqMOi6nxqgelo143rHZDQ';
-// সুপাবেস ক্লায়েন্ট ইনিশিয়ালাইজ (আপনার প্রয়োজন হলে ব্যবহার করুন)
-// const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+import { getData, setData } from './api.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const tg = window.Telegram.WebApp;
-    tg.expand();
-    
-    // ইউজার নাম সেট করা
-    const userName = tg.initDataUnsafe.user?.first_name || 'Player';
-    const headerP = document.querySelector('header p');
-    if (headerP) headerP.innerText = `Welcome back, ${userName}!`;
-    
-    // ব্যালেন্স আপডেট (উদাহরণ)
-    const balanceDisplay = document.getElementById('balance-display');
-    if (balanceDisplay) balanceDisplay.innerText = "৳ 0.00";
-});
+// টেলিগ্রাম ওয়েব অ্যাপের ইউজার আইডি নেওয়া
+const tg = window.Telegram.WebApp;
+tg.ready();
+const userId = tg.initDataUnsafe.user?.id || "guest_user";
 
-function processWithdraw() {
-    alert("Withdrawal request sent!");
+// পেজ লোড হলে ব্যালেন্স আপডেট করা (ইন্ডেক্স বা ওয়ালেট পেজের জন্য)
+async function updateBalanceDisplay() {
+    const userData = await getData(`user_${userId}`) || { balance: 0, tasks: [] };
+    const balanceElement = document.getElementById('balance');
+    if (balanceElement) balanceElement.innerText = userData.balance.toFixed(2);
 }
+
+// টাস্ক ক্লিক হ্যান্ডেলার
+window.handleTask = async (adLink, taskId) => {
+    // পপ-আন্ডার দেখানোর মেসেজ
+    alert("বিজ্ঞাপন লোড হচ্ছে, ব্যাক করে আবার ক্লিক করুন!");
+    window.open(adLink, '_blank');
+
+    // ৩০ সেকেন্ড পর পেমেন্ট যোগ করার লজিক
+    setTimeout(async () => {
+        let userData = await getData(`user_${userId}`) || { balance: 0, tasks: [] };
+        
+        // একই টাস্ক যেন বারবার না করা যায়
+        if (!userData.tasks.includes(taskId)) {
+            userData.balance += 0.50; // প্রতি টাস্কের দাম ৫০ পয়সা
+            userData.tasks.push(taskId);
+            
+            await setData(`user_${userId}`, userData);
+            alert("অভিনন্দন! আপনি ০.৫০ টাকা পেয়েছেন।");
+            updateBalanceDisplay();
+        } else {
+            alert("আপনি এই টাস্কটি আগেই করেছেন!");
+        }
+    }, 30000); // ৩০ সেকেন্ড অপেক্ষা
+};
+
+// অ্যাপ ওপেন হওয়ার সাথে সাথে ব্যালেন্স লোড করা
+updateBalanceDisplay();
