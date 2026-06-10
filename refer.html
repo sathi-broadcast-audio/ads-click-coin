@@ -1,26 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral - Ads Click Coin</title>
+    <title>Refer & Earn - Ads Click Coin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>👥 Referral Center</h1>
-        <div class="card">
-            <h3>Your Referral Link</h3>
-            <div id="referralLink" class="btn" style="background:#334155;">https://t.me/AdsClickCoinBot?start=USER_ID</div>
-            <button class="btn" id="shareBtn">Share Referral Link</button>
-        </div>
-        <div class="navbar">
-            <a href="index.html">🏠 Home</a>
-            <a href="refer.html">👥 Refer</a>
-            <a href="wallet.html">💰 Wallet</a>
-            <a href="profile.html">👤 Profile</a>
+
+    <div class="refer-container">
+        <header>
+            <h1>Invite Friends</h1>
+            <p>Earn ৳5 for every successful referral!</p>
+        </header>
+
+        <!-- রেফারেল লিঙ্ক সেকশন -->
+        <section class="refer-link-box">
+            <p>Your Referral Link:</p>
+            <div class="link-display">
+                <span id="ref-link">https://t.me/your_bot_username?start=USER_ID</span>
+            </div>
+            <div class="refer-actions">
+                <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+                <button class="share-btn" onclick="shareOnTelegram()">Share on Telegram</button>
+            </div>
+        </section>
+
+        <!-- রেফারেল স্ট্যাটাস -->
+        <section class="refer-stats">
+            <div class="stat-card">
+                <p>Total Referrals</p>
+                <h3 id="total-refs">0</h3>
+            </div>
+            <div class="stat-card">
+                <p>Pending Rewards</p>
+                <h3 id="pending-rewards">৳0</h3>
+            </div>
+        </section>
+
+        <!-- নির্দেশনাবলী -->
+        <div class="refer-info">
+            <small>* Note: Referral bonus of ৳5 will be credited only when your friend reaches a balance of ৳5.</small>
         </div>
     </div>
+
+    <!-- নেভিগেশন বার -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="tasks.html" class="nav-item">Tasks</a>
+        <a href="refer.html" class="nav-item">Refer</a>
+        <a href="wallet.html" class="nav-item">Wallet</a>
+        <a href="profile.html" class="nav-item">Profile</a>
+    </nav>
+
+    <!-- জাভাস্ক্রিপ্ট ফাইল লিঙ্ক -->
     <script src="script.js"></script>
 </body>
 </html>
