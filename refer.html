@@ -1,42 +1,74 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <title>Refer - AdsClickCoin</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Referral System</h1>
-        <div class="card">
-            <p>Your Referral ID: <b id="refer-id">Loading...</b></p>
-            <p style="font-size: 14px; color: gray;">আপনার আইডিটি বন্ধুদের শেয়ার করুন!</p>
-            <button class="btn-blue" onclick="copyReferLink()">Copy Referral Link</button>
-        </div>
-    </div>
+import { getData, setData } from './api.js';
 
-    <div class="nav-bar">
-        <a href="index.html" class="nav-link">🏠</a>
-        <a href="tasks.html" class="nav-link">📋</a>
-        <a href="refer.html" class="nav-link" style="border-bottom: 3px solid #28a745;">👥</a>
-        <a href="wallet.html" class="nav-link">💰</a>
-        <a href="profile.html" class="nav-link">👤</a>
-    </div>
+const tg = window.Telegram.WebApp;
+tg.ready();
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        
-        // ইউজার আইডি সেট করা
-        const userId = tg.initDataUnsafe.user?.id || "N/A";
-        document.getElementById('refer-id').innerText = userId;
+export const getUserId = () => tg.initDataUnsafe.user?.id || "guest_user";
 
-        function copyReferLink() {
-            const link = `https://t.me/YOUR_BOT_USERNAME?start=${userId}`;
-            navigator.clipboard.writeText(link);
-            alert("Referral Link copied!");
+// সব পেজে ব্যালেন্স দেখানোর জন্য
+export async function updateBalanceDisplay() {
+    const userId = getUserId();
+    const data = await getData(`user_${userId}`) || { balance: 0, tasks: [], referrals: [], history: [] };
+    const balEl = document.getElementById('balance');
+    if (balEl) balEl.innerText = data.balance.toFixed(2);
+    return data;
+}
+
+// রেফারেল লিংক জেনারেশন
+export const getReferLink = () => `https://t.me/AdsClickCoinBot?start=${getUserId()}`;
+
+// রেফারেল লিস্ট এবং স্ট্যাটাস লোড করা
+export async function loadReferrals() {
+    const userId = getUserId();
+    const data = await getData(`user_${userId}`) || { referrals: [] };
+    const list = document.getElementById('refer-list');
+    if (!list) return;
+
+    if (data.referrals.length === 0) {
+        list.innerHTML = "<p>No referrals yet.</p>";
+    } else {
+        list.innerHTML = data.referrals.map(ref => `
+            <div class="card">
+                <p>User ID: ${ref.id}</p>
+                <p>Status: ${ref.balance >= 5 ? '✅ Counted' : '⏳ Pending'}</p>
+            </div>
+        `).join('');
+    }
+}
+
+// টাস্ক হ্যান্ডলার
+window.handleTask = async (adLink, taskId) => {
+    const userId = getUserId();
+    alert("বিজ্ঞাপন লোড হচ্ছে, ৩০ সেকেন্ড পর ব্যাক করুন!");
+    window.open(adLink, '_blank');
+
+    setTimeout(async () => {
+        let data = await getData(`user_${userId}`) || { balance: 0, tasks: [] };
+        if (!data.tasks.includes(taskId)) {
+            data.balance += 0.50;
+            data.tasks.push(taskId);
+            await setData(`user_${userId}`, data);
+            alert("অ্যাড সম্পন্ন হয়েছে! ০.৫০ টাকা যোগ হয়েছে।");
+            updateBalanceDisplay();
         }
-    </script>
-</body>
-</html>
+    }, 30000);
+};
+
+// উইথড্র হ্যান্ডলার
+window.submitWithdraw = async () => {
+    const userId = getUserId();
+    const walletNum = document.getElementById('walletNum').value;
+    if (!walletNum) return alert("নম্বর লিখুন!");
+
+    let data = await getData(`user_${userId}`) || { balance: 0, history: [] };
+    if (data.balance >= 50) {
+        data.balance -= 50;
+        data.history.push({ amount: 50, status: "Pending", number: walletNum });
+        await setData(`user_${userId}`, data);
+        alert("উইথড্র রিকোয়েস্ট জমা হয়েছে!");
+    } else {
+        alert("মিনিমাম ৫০ টাকা ব্যালেন্স প্রয়োজন!");
+    }
+};
+
+updateBalanceDisplay();
