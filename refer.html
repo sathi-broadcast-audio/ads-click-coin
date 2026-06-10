@@ -2,20 +2,25 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral - AdsClickCoin</title>
     <link rel="stylesheet" href="style.css">
-    <title>Refer - AdsClickCoin</title>
 </head>
 <body>
+
     <div class="container">
         <h1>Referral System</h1>
+        
         <div class="card">
             <h3>Your Referral Link</h3>
-            <input type="text" id="refLink" readonly style="text-align: center; font-weight: bold;">
-            <button class="btn-green" onclick="copyLink()">Copy Link</button>
+            <input type="text" id="referralLinkInput" readonly>
+            <button class="btn-green" onclick="copyRefLink()">Copy Link</button>
         </div>
-        
-        <h3>Referral History</h3>
-        <div id="refer-list"></div>
+
+        <h3>Your Referral History</h3>
+        <div id="refer-list">
+            <p>Loading your referrals...</p>
+        </div>
     </div>
 
     <div class="nav-bar">
@@ -27,21 +32,15 @@
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script type="module">
-        import { getReferLink, loadReferrals } from './script.js';
-        
-        // লিংক সেট করা
-        document.getElementById('refLink').value = getReferLink();
-        
-        // রেফারাল লিস্ট লোড করা
-        loadReferrals();
-
-        window.copyLink = () => {
-            const copyText = document.getElementById("refLink");
+    <script type="module" src="script.js"></script>
+    
+    <script>
+        function copyRefLink() {
+            const copyText = document.getElementById("referralLinkInput");
             copyText.select();
             document.execCommand("copy");
-            alert("Referral Link copied to clipboard!");
-        };
+            alert("Link Copied!");
+        }
     </script>
 </body>
 </html>
