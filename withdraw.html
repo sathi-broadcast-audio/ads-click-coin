@@ -1,33 +1,23 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="dashboard">
-        <header><h1>Withdrawal</h1></header>
-        
-        <div class="balance-card">
-            <p>Enter details for withdrawal</p>
-            <input type="number" id="amount" placeholder="Amount (Minimum 20)">
-            <select id="method" style="width:100%; padding:15px; background:#251a38; color:white; border-radius:12px; margin-top:8px; border:1px solid #3d2c5e;">
-                <option>bKash</option>
-                <option>Nagad</option>
-                <option>Rocket</option>
-            </select>
-            <input type="text" id="account-number" placeholder="Account Number">
-            <button class="withdraw-main-btn" style="margin-top:20px;" onclick="processWithdraw()">Confirm Request</button>
+<html lang="bn">
+<body style="font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding-bottom: 90px;">
+    <div style="padding: 20px;">
+        <h1 style="color: #333;">Withdraw Request</h1>
+        <div style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <p>Select Payment Method:</p>
+            <button style="width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 10px; margin-bottom: 10px; font-weight: bold;">Bkash</button>
+            <button style="width: 100%; padding: 15px; background: #ffc107; color: black; border: none; border-radius: 10px; margin-bottom: 20px; font-weight: bold;">Nagad</button>
+            
+            <input type="text" placeholder="Enter Wallet Number" style="width: 90%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px;">
+            <button style="width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold;">Submit Withdrawal</button>
         </div>
     </div>
-
-    <nav class="navbar">
-        <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i><span>Tasks</span></a>
-        <a href="refer.html" class="nav-item"><i class="fas fa-user-friends"></i><span>Refer</span></a>
-        <a href="wallet.html" class="nav-item active"><i class="fas fa-wallet"></i><span>Wallet</span></a>
-        <a href="profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
-    </nav>
-    <script src="script.js"></script>
+    <div style="position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 15px 0; border-top: 2px solid #eee;">
+        <a href="index.html" style="font-size: 28px; text-decoration: none;">🏠</a>
+        <a href="tasks.html" style="font-size: 28px; text-decoration: none;">📋</a>
+        <a href="refer.html" style="font-size: 28px; text-decoration: none;">👥</a>
+        <a href="wallet.html" style="font-size: 28px; text-decoration: none; border-bottom: 3px solid #28a745;">💰</a>
+        <a href="profile.html" style="font-size: 28px; text-decoration: none;">👤</a>
+    </div>
 </body>
 </html>
