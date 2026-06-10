@@ -1,83 +1,94 @@
-/* বেসিক সেটআপ */
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background-color: #f0f2f5; 
-    margin: 0; 
-    padding-bottom: 90px; 
+/* গুগল ফন্ট ইমপোর্ট */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #28a745;
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333333;
 }
 
-.container { 
-    padding: 20px; 
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    padding-bottom: 100px; /* নিচের নেভিগেশন বারের জন্য জায়গা */
+    color: var(--text-color);
 }
 
-/* কার্ড স্টাইল */
-.card { 
-    background: white; 
-    padding: 20px; 
-    border-radius: 20px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-    margin-bottom: 20px; 
+.container {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-/* বাটন স্টাইল */
-.btn-green { 
-    width: 100%; 
-    padding: 15px; 
-    background: #28a745; 
-    color: white; 
-    border: none; 
-    border-radius: 12px; 
-    font-size: 18px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    transition: 0.2s; 
+/* আধুনিক কার্ড স্টাইল */
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eef;
 }
 
-.btn-green:active { transform: scale(0.95); }
-
-.btn-blue { 
-    background: #007bff; 
-    color: white; 
-    padding: 12px; 
-    border: none; 
-    border-radius: 10px; 
-    width: 100%; 
-    margin-bottom: 10px; 
-    font-weight: bold; 
+/* বাটন ডিজাইন */
+.btn-green {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
 }
 
-.btn-yellow { 
-    background: #ffc107; 
-    color: black; 
-    padding: 12px; 
-    border: none; 
-    border-radius: 10px; 
-    width: 100%; 
-    margin-bottom: 10px; 
-    font-weight: bold; 
+.btn-green:active {
+    transform: scale(0.97);
+    background: #1e7e34;
 }
 
-/* নেভিগেশন বার ডিজাইন */
-.nav-bar { 
-    position: fixed; 
-    bottom: 0; 
-    width: 100%; 
-    display: flex; 
-    justify-content: space-around; 
-    background: #fff; 
-    padding: 15px 0; 
-    border-top: 2px solid #eee; 
-    z-index: 1000; 
+/* নেভিগেশন বার */
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-around;
+    background: #ffffff;
+    padding: 15px 0;
+    border-top: 2px solid #f0f0f0;
+    z-index: 1000;
 }
 
-.nav-link { 
-    font-size: 28px; 
-    text-decoration: none; 
-    transition: 0.3s; 
+.nav-link {
+    font-size: 26px;
+    text-decoration: none;
+    filter: grayscale(100%);
+    transition: 0.3s;
 }
 
-.nav-link:hover { transform: scale(1.2); }
+.nav-link:hover, .nav-link.active {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
 
-/* টাইটেল এবং টেক্সট */
-h1 { color: #333; font-size: 24px; }
-h3 { margin-top: 0; }
+/* টাইটেল ডিজাইন */
+h1 { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; }
+h3 { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+
+/* ইনপুট ফিল্ড */
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
