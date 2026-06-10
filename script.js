@@ -33,7 +33,7 @@ async function updateUI() {
             refList.innerHTML = userData.referrals.map(ref => `
                 <div class="card">
                     <p>User ID: ${ref.id}</p>
-                    <p>Status: ${ref.balance >= 5 ? '✅ Counted' : '⏳ Pending'}</p>
+                    <p>Status: ${ref.balance >= 5 ? '✅ Approved' : '⏳ Pending (Needs 5 Tk)'}</p>
                 </div>
             `).join('');
         }
@@ -56,7 +56,7 @@ async function updateUI() {
     }
 }
 
-// ২. টাস্ক ক্লিক হ্যান্ডেলার (আপনার ৮ নম্বর ফাইলের লজিক)
+// ২. টাস্ক ক্লিক হ্যান্ডেলার
 window.handleTask = async (adLink, taskId) => {
     alert("বিজ্ঞাপন লোড হচ্ছে, ব্যাক করে আবার ক্লিক করুন!");
     window.open(adLink, '_blank');
