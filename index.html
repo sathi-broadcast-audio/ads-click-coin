@@ -2,19 +2,23 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Home - AdsClickCoin</title>
 </head>
 <body>
+
+    <div id="loading-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:9999; display:flex; justify-content:center; align-items:center;">
+        <p>Loading your data...</p>
+    </div>
+
     <div class="container">
-        <h1>Welcome to AdsClickCoinBot</h1>
-        <p>Hey, <span id="username">User</span>!</p>
+        <h1>Welcome, <span id="username">User</span>!</h1>
         <button class="btn-green" onclick="location.href='tasks.html'">START NOW</button>
+        
         <div class="card">
             <h3>Balance Info</h3>
-            <!-- ব্যালেন্স এখানে আপডেট হবে -->
             <p>Available: <b id="balance">0.00</b> BDT</p>
-            <p>Pending: <b>0.00 BDT</b></p>
         </div>
     </div>
 
@@ -26,8 +30,33 @@
         <a href="profile.html" class="nav-link">👤</a>
     </div>
 
-    <!-- টেলিগ্রাম ওয়েব অ্যাপের জন্য -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script type="module" src="script.js"></script>
+    
+    <script type="module">
+        import { getData } from './api.js';
+        
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+
+        // ইউজার নাম দেখানো
+        const user = tg.initDataUnsafe.user;
+        if (user) {
+            document.getElementById('username').innerText = user.first_name;
+        }
+
+        // ব্যালেন্স লোড করা
+        async function init() {
+            if (user) {
+                const userData = await getData(`user_${user.id}`);
+                if (userData) {
+                    document.getElementById('balance').innerText = userData.balance.toFixed(2);
+                }
+            }
+            // লোডিং স্ক্রিন বন্ধ করা
+            document.getElementById('loading-screen').style.display = 'none';
+        }
+        
+        init();
+    </script>
 </body>
 </html>
