@@ -1,20 +1,27 @@
-// api.js - ডাটাবেসের সাথে যোগাযোগের ফাইল
+import { Redis } from '@upstash/redis';
 
-const REST_URL = "https://star-chigger-146667.upstash.io";
-const REST_TOKEN = "gQAAAAAAAjzrAAIgcDIwMTkxYjJiNzc5Y2Q0M2JiOWY5ZDQ1NjFlZTE4MThlNg";
+// আপনার প্রদান করা ডাটাবেস কনফিগারেশন
+const redis = new Redis({
+  url: 'https://star-chigger-146667.upstash.io',
+  token: 'gQAAAAAAAjzrAAIgcDIwMTkxYjJiNzc5Y2Q0M2JiOWY5ZDQ1NjFlZTE4MThlNg',
+});
 
-// ডাটাবেস থেকে ডাটা আনার ফাংশন
+// ডাটা আনার ফাংশন (getData)
 export async function getData(key) {
-    const response = await fetch(`${REST_URL}/get/${key}`, {
-        headers: { Authorization: `Bearer ${REST_TOKEN}` }
-    });
-    const data = await response.json();
-    return data.result ? JSON.parse(data.result) : null;
+    try {
+        const data = await redis.get(key);
+        return data; // এটি সরাসরি ডাটা রিটার্ন করবে
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+    }
 }
 
-// ডাটাবেসে ডাটা পাঠানোর ফাংশন
+// ডাটা সেভ করার ফাংশন (setData)
 export async function setData(key, value) {
-    await fetch(`${REST_URL}/set/${key}/${JSON.stringify(value)}`, {
-        headers: { Authorization: `Bearer ${REST_TOKEN}` }
-    });
+    try {
+        await redis.set(key, value);
+    } catch (error) {
+        console.error("Error setting data:", error);
+    }
 }
